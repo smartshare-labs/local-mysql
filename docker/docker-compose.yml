@@ -9,7 +9,7 @@ services:
       build:
         context: ..
         dockerfile: ./docker/Dockerfile.local
-      image: mysql:5.7
+      image: smartshare/mysql:5.7
       command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
       volumes:
         - ./docker/provision/mysql/init:/docker-entrypoint-initdb.d

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+#### run migration and data import scripts
+/root/migrate.sh &
+
+
+###############################################################################
 set -eo pipefail
 shopt -s nullglob
 
@@ -212,3 +218,7 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 fi
 
 exec "$@"
+
+
+
+

@@ -1,0 +1,21 @@
+#!/bin/bash
+source ../venv/bin/activate
+
+if [ -z "${1}" ]
+then
+    echo "Please specify a schema name. (e.g. ./create_schema example_schema)"
+else
+    mkdir ../schema/${1}
+    cd ../schema/${1}
+
+    echo "Creating init script..."
+    touch ../init/${1}.sql
+    echo "CREATE DATABASE IF NOT EXISTS \`${1}\`;" >> ../init/${1}.sql
+
+    echo "Initializing alembic..."
+    alembic init alembic
+    alembic revision -m 'create schema'
+fi
+
+
+
