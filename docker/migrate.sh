@@ -5,7 +5,7 @@ while ! mysqladmin ping -h"localhost" -u root -p"password" --silent; do
     sleep 1
 done
 
-cd ~/
+cd ~/schema
 
 for d in * ; do
   if [ "$d" = 'init' ] ; then

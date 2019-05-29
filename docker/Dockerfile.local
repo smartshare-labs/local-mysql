@@ -12,7 +12,7 @@ COPY ./data/ /usr/local/bin/docker-entrypoint-initdb.d/
 RUN chmod -R +x /usr/local/bin/docker-entrypoint-initdb.d
 
 COPY ./requirements.txt /root
-COPY ./schema /root/
+COPY ./schema /root/schema
 
 COPY ./docker/migrate.sh /root/migrate.sh
 RUN chmod +x /root/migrate.sh

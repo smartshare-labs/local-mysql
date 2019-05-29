@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./sync_schema
+
+docker exec -it database_container /root/migrate.sh
