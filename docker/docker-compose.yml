@@ -1,0 +1,24 @@
+version: '3'
+
+volumes:
+    db:
+        driver: local
+
+services:
+    db:
+      build:
+        context: ..
+        dockerfile: ./docker/Dockerfile.local
+      image: mysql:5.7
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      volumes:
+        - ./docker/provision/mysql/init:/docker-entrypoint-initdb.d
+      ports:
+        - "3306:3306"
+      container_name: database_container
+      networks:
+      - databasemodels_default
+
+networks:
+  databasemodels_default:
+    external: true

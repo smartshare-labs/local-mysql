@@ -1,0 +1,25 @@
+FROM mysql:5.7
+LABEL maintainer="Luke Lombardi"
+
+ENV MYSQL_ROOT_PASSWORD=password
+
+COPY ./docker/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+COPY ./schema/init/ /usr/local/bin/docker-entrypoint-initdb.d/
+COPY ./data/ /usr/local/bin/docker-entrypoint-initdb.d/
+RUN chmod -R +x /usr/local/bin/docker-entrypoint-initdb.d
+
+COPY ./requirements.txt /root
+COPY ./schema /root/
+COPY ./docker/migrate.sh /root/migrate.sh
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install python3 -y
+RUN apt-get install python3-pip -y
+RUN apt-get install python3-dev libmysqlclient-dev
+RUN pip3 install -r /root/requirements.txt
+
+RUN cd /root && ./migrate.sh
+
+EXPOSE 3306
