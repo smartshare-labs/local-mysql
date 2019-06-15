@@ -17,8 +17,8 @@ services:
         - "3306:3306"
       container_name: database_container
       networks:
-      - databasemodels_default
+      - default_network
 
 networks:
-  databasemodels_default:
+  default_network:
     external: true
